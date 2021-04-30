@@ -59,6 +59,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CROS_ORIGIN_WHITELIST = [
+    "http://localhost:3000"
+]
+
 ROOT_URLCONF = 'jira_api.urls'
 
 TEMPLATES = [
@@ -79,6 +83,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jira_api.wsgi.application'
 
+REST_FRAMEWORK = {
+    # PermissionでAutheticationを通ったユーザーのみViewにアクセスできる
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    # AuthenticationにJWTを使用することを設定
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+
+SIMPEL_JWT = {
+    'AUTH_HEADER_TYPE': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -115,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -128,3 +148,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
