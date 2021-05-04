@@ -32,7 +32,7 @@ class TaskSerializer(serializers.ModelSerializer):
     responsible_username = serializers.ReadOnlyField(source='responsible.username')
     status_name = serializers.CharField(source='get_status_display', read_only=True)
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
-    updated_at = serializers.DataTimeField(format="%Y-%m-%d %H:%M", read_only=True)
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M", read_only=True)
 
     class Meta:
         model = Task
@@ -40,6 +40,5 @@ class TaskSerializer(serializers.ModelSerializer):
                   'estimate', 'responsible', 'responsible_username', 'owner', 'owner_username', 'created_at',
                   'updated_at']
 
-        extra_kwargs = {'owner', {'read_only': True}}
-
+        extra_kwargs = {'owner': {'read_only': True}}
 

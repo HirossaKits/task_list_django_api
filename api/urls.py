@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .view import TaskViewSet, CategoryViewSet, CreateUserView, LoginUserView, ProfileViewSet
+from .views import TaskViewSet, CategoryViewSet, CreateUserView, ListUserView, LoginUserView, ProfileViewSet
 
 router = routers.DefaultRouter()
 router.register('category', CategoryViewSet)

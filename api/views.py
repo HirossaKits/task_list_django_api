@@ -6,7 +6,7 @@ from .models import Task, Category, Profile
 from django.contrib.auth.models import User
 from . import custompermissions
 
-class CreateUserView(generics.CeateAPIView):
+class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     # 新規登録時なので、誰でもアクセスできるようにしておく
     permission_classes = (permissions.AllowAny,)
@@ -27,7 +27,7 @@ class LoginUserView(generics.RetrieveUpdateAPIView):
 
 # ModelViewSetにはデフォルトでCRUD処理が実装されている
 class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.object.all()
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
     # user_profileの属性にログインユーザーを割り当てる
