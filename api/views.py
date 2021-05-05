@@ -25,6 +25,10 @@ class LoginUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         return self.request.user
 
+    def update(self, request, *args, **kwargs):
+        response = {'message': 'PUT method is not allowed'}
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
 # ModelViewSetにはデフォルトでCRUD処理が実装されている
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -32,7 +36,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     # user_profileの属性にログインユーザーを割り当てる
     def perform_create(self, serializer):
-        serializer.save(user_profile=self.user)
+        serializer.save(user_profile=self.request.user)
 
     # deleteメソッドを無効化
     def destory(self, request, *args, **kwargs):

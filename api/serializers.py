@@ -3,10 +3,9 @@ from .models import Task, Category,Profile
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
-
-    class Meat:
+    class Meta:
         model = User
-        filed = ['id','userName','passwrod']
+        fields = ['id','username','password']
         extra_kwargs = {'password':{'write_only': True, 'required': True}}
 
     # passwordをハッシュ化
@@ -23,7 +22,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        field = ['id','item']
+        fields = ['id','item']
 
 class TaskSerializer(serializers.ModelSerializer):
     # 他のオブジェクトから取得
