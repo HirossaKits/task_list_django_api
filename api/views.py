@@ -39,7 +39,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         serializer.save(user_profile=self.request.user)
 
     # deleteメソッドを無効化
-    def destory(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs):
         response = {'message': 'DELETE method is not allowed'}
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
